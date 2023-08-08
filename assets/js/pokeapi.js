@@ -3,7 +3,7 @@ const pokeApi = {}
 function convertPokeApiToPokemon(pokeDetail) {
     const pokemon = new Pokemon
     pokemon.name = pokeDetail.name
-    pokemon.number = pokeDetail.order
+    pokemon.number = pokeDetail.id
     const types = pokeDetail.types.map((typeSlot) => typeSlot.type.name)
     const [type] = types
     pokemon.types = types
@@ -19,8 +19,8 @@ pokeApi.getPokemonDetail = (pokemon) => {
         .then(convertPokeApiToPokemon)
 }
 
-pokeApi.getPokemons = (limit = 30) => {
-    const url = `https://pokeapi.co/api/v2/pokemon?limit=${limit}`
+pokeApi.getPokemons = (offset = 0, limit = 30) => {
+    const url = `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`
     return fetch(url)
         .then((res) => res.json())
         .then((jsonBody) => jsonBody.results)

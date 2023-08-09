@@ -9,14 +9,16 @@ function loadPokemonItens(offset, limit) {
         .then((pokemons = []) => {
             const newHtml = pokemons.map((pokemon) => `
                 <li class="pokemon ${pokemon.type}">
-                    <span class="number">#${pokemon.number}</span>
+                    <div class="numberholder">
+                        <span class="number">#${("000" + pokemon.number).slice(-3)}</span>
+                    </div>
                     <span class="name">${pokemon.name}</span>
+                    <img class="pokeball" src="./assets/img/pokeball.png">
                     <div class="detail">
                         <ol class="types">
                             ${pokemon.types.map((type) => `<li class="type ${type}">${type}</li>`).join("")}
                         </ol>
-                        <img src="${pokemon.image}" 
-                        alt="${pokemon.name}">
+                        <img class="pokeimage" src="${pokemon.image}"
                     </div>
                 </li>`
             ).join("")
